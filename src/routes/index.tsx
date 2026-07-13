@@ -1,13 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import MemoList from "../components/MemoList";
 
 export const Route = createFileRoute("/")({
-	component: Index,
+	component: MemoList,
 });
-
-function Index() {
-	return (
-		<div className="p-2">
-			<h3>Welcome Home!</h3>
-		</div>
-	);
-}

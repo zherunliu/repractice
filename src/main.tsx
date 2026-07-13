@@ -6,7 +6,6 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import App from "./App";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 
@@ -26,7 +25,7 @@ if (!rootElement.innerHTML) {
 	const root = createRoot(rootElement);
 	root.render(
 		<StrictMode>
-			<App />
+			<RouterProvider router={router}></RouterProvider>
 		</StrictMode>,
 	);
 }
