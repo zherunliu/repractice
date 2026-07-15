@@ -1,24 +1,22 @@
 import List from "@mui/material/List";
-import type { TMemoItem } from "../types/MemoItem";
+import useMemoList from "../hooks/memoList";
 import MemoListItem from "./MemoListItem";
 
 export default function MemoList() {
-	const mockMemoList: TMemoItem[] = [
-		{
-			id: 1,
-			title: "Memo 1",
-			content: "This is the content for memo 1",
-		},
-		{ id: 2, title: "Memo 2", content: "This is the content for memo 2" },
-		{ id: 3, title: "Memo 3", content: "This is the content for memo 3" },
-		{ id: 4, title: "Memo 4", content: "This is the content for memo 4" },
-		{ id: 5, title: "Memo 5", content: "This is the content for memo 5" },
-	];
+	const { memoList } = useMemoList();
+
 	return (
-		<List sx={{ width: "100%", bgcolor: "background.paper" }}>
-			{mockMemoList.map((memoItem) => (
-				<MemoListItem key={memoItem.id} memoItem={memoItem} />
-			))}
-		</List>
+		<>
+			{memoList?.length === 0 && (
+				<h2 style={{ textAlign: "center" }}>
+					There's no memo, try to add one.
+				</h2>
+			)}
+			<List sx={{ width: "100%", bgcolor: "background.paper" }}>
+				{memoList?.map((memoItem) => (
+					<MemoListItem key={memoItem.id} memoItem={memoItem} />
+				))}
+			</List>
+		</>
 	);
 }
