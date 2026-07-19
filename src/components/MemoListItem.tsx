@@ -1,4 +1,5 @@
-import { Divider, ListItem, ListItemText } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Divider, IconButton, ListItem, ListItemText } from "@mui/material";
 import type { ReactElement } from "react";
 import type { TMemoItem } from "../types/MemoItem";
 
@@ -41,13 +42,26 @@ function highlightText(text: string, search: string) {
 function MemoListItem({
 	memoItem,
 	search = "",
+	onDelete,
 }: {
 	memoItem: TMemoItem;
 	search?: string;
+	onDelete: (id: number) => void;
 }) {
 	return (
 		<>
-			<ListItem alignItems="flex-start">
+			<ListItem
+				secondaryAction={
+					<IconButton
+						onClick={() => onDelete(memoItem.id)}
+						edge="end"
+						aria-label="delete"
+					>
+						<DeleteIcon />
+					</IconButton>
+				}
+				alignItems="flex-start"
+			>
 				<ListItemText
 					primary={highlightText(memoItem.title, search)}
 					secondary={highlightText(memoItem.content, search)}
