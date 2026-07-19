@@ -1,5 +1,6 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Divider, IconButton, ListItem, ListItemText } from "@mui/material";
+import { useNavigate } from "@tanstack/react-router";
 import type { ReactElement } from "react";
 import type { TMemoItem } from "../types/MemoItem";
 
@@ -48,12 +49,23 @@ function MemoListItem({
 	search?: string;
 	onDelete: (id: number) => void;
 }) {
+	const navigate = useNavigate();
+
 	return (
 		<>
 			<ListItem
+				onClick={() =>
+					navigate({
+						to: "/memo/$memoId",
+						params: { memoId: `${memoItem.id}` },
+					})
+				}
 				secondaryAction={
 					<IconButton
-						onClick={() => onDelete(memoItem.id)}
+						onClick={(event) => {
+							event.stopPropagation();
+							onDelete(memoItem.id);
+						}}
 						edge="end"
 						aria-label="delete"
 					>
