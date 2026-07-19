@@ -1,8 +1,20 @@
 import { TextField } from "@mui/material";
+import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import { Route } from "../routes/search";
 import MemoList from "./MemoList";
+
 export function Search() {
-	const [searchItem, setSearchItem] = useState("");
+	const { keyword } = Route.useSearch();
+	const [searchItem, setSearchItem] = useState(keyword);
+	const navigate = useNavigate();
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchItem(event.target.value);
+		navigate({
+			to: ".",
+			search: { keyword: event.target.value },
+		});
+	};
 
 	return (
 		<main style={{ display: "flex", flexDirection: "column", padding: 16 }}>
@@ -11,7 +23,7 @@ export function Search() {
 				label="Search"
 				variant="outlined"
 				value={searchItem}
-				onChange={(e) => setSearchItem(e.target.value)}
+				onChange={handleChange}
 			/>
 			<MemoList search={searchItem} />
 		</main>

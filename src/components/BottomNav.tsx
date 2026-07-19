@@ -5,6 +5,9 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Box from "@mui/material/Box";
 import { useLocation, useNavigate } from "@tanstack/react-router";
+import { Route as HomeRoute } from "../routes";
+import { Route as AddRoute } from "../routes/add";
+import { Route as SearchRoute } from "../routes/search";
 
 export default function BottomNav() {
 	const navigate = useNavigate();
@@ -19,11 +22,19 @@ export default function BottomNav() {
 					navigate({ to: newValue });
 				}}
 			>
-				<BottomNavigationAction label="Home" value="/" icon={<HomeIcon />} />
-				<BottomNavigationAction label="Add" value="/add" icon={<AddIcon />} />
+				<BottomNavigationAction
+					label="Home"
+					value={HomeRoute.to}
+					icon={<HomeIcon />}
+				/>
+				<BottomNavigationAction
+					label="Add"
+					value={AddRoute.to}
+					icon={<AddIcon />}
+				/>
 				<BottomNavigationAction
 					label="Search"
-					value="/search"
+					value={SearchRoute.to}
 					icon={<SearchIcon />}
 				/>
 			</BottomNavigation>
