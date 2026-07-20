@@ -2,7 +2,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Divider, IconButton, ListItem, ListItemText } from "@mui/material";
 import { useNavigate } from "@tanstack/react-router";
 import type { ReactElement } from "react";
-import type { TMemoItem } from "../types/MemoItem";
+import type { TMemoItem } from "@/types/MemoItem";
 
 function highlightText(text: string, search: string) {
 	if (!search) {

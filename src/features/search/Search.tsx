@@ -1,8 +1,8 @@
 import { TextField } from "@mui/material";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Route } from "../routes/search";
-import MemoList from "./MemoList";
+import { Route } from "@/routes/search";
+import MemoList from "../home/MemoList";
 
 export function Search() {
 	const { keyword } = Route.useSearch();

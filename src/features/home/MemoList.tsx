@@ -2,8 +2,8 @@ import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import useMemoList from "../hooks/memoList";
-import type { TMemoItem } from "../types/MemoItem";
+import useMemoList from "@/hooks/memoList";
+import type { TMemoItem } from "@/types/MemoItem";
 import MemoListItem from "./MemoListItem";
 
 export default function MemoList({ search = "" }) {

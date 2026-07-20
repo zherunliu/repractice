@@ -5,9 +5,9 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Box from "@mui/material/Box";
 import { useLocation, useNavigate } from "@tanstack/react-router";
-import { Route as HomeRoute } from "../routes";
-import { Route as AddRoute } from "../routes/add";
-import { Route as SearchRoute } from "../routes/search";
+import { Route as HomeRoute } from "@/routes";
+import { Route as AddRoute } from "@/routes/add";
+import { Route as SearchRoute } from "@/routes/search";
 
 export default function BottomNav() {
 	const navigate = useNavigate();

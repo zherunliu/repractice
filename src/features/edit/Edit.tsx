@@ -2,8 +2,8 @@ import { Button, TextField } from "@mui/material";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
-import useMemoList from "../hooks/memoList";
-import { Route } from "../routes/memo.$memoId";
+import useMemoList from "@/hooks/memoList";
+import { Route } from "@/routes/memo.$memoId";
 
 export function Edit() {
 	const { memoId } = Route.useParams();

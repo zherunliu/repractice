@@ -1,6 +1,6 @@
-import BottomNav from "./components/BottomNav";
-import MemoList from "./components/MemoList";
-import NavBar from "./components/NavBar";
+import MemoList from "./features/home/MemoList";
+import BottomNav from "./ui/BottomNav";
+import NavBar from "./ui/NavBar";
 
 function App() {
 	return (
