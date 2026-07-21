@@ -19,32 +19,31 @@ export default function Navbar() {
 		);
 	}
 
-	const items = [
-		{
-			label: "Cart",
-			icon: "pi pi-shopping-cart",
-		},
-	];
-
 	const start = (
-		<Button icon="pi pi-shopping-bag" rounded text aria-label="logo" disabled />
+		<Button
+			type="button"
+			label="Cart"
+			icon="pi pi-shopping-cart"
+			text
+			badge="2"
+			badgeClassName="p-badge-danger"
+		/>
 	);
 	const end = (
-		<>
+		<div className="flex justify-content-between">
 			<InputText placeholder="Search" type="text" className="w-full mr-2" />
 			<Button
 				icon={`pi pi-${isDark ? "sun" : "moon"}`}
-				rounded
 				text
 				aria-label="theme"
 				onClick={toggleTheme}
 			/>
-		</>
+		</div>
 	);
 
 	return (
 		<div className="card">
-			<Menubar model={items} start={start} end={end} />
+			<Menubar start={start} end={end} />
 		</div>
 	);
 }
