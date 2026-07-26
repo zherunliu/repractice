@@ -1,12 +1,15 @@
+import { useSetAtom } from "jotai";
 import { PrimeReactContext } from "primereact/api";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Menubar } from "primereact/menubar";
 import { useContext, useState } from "react";
+import { visibleAtom } from "../atoms/visible";
 
 export default function Navbar() {
 	const [isDark, setIsDark] = useState(false);
 	const { changeTheme } = useContext(PrimeReactContext);
+	const setVisible = useSetAtom(visibleAtom);
 
 	const LIGHT_THEME = "lara-light-pink";
 	const DARK_THEME = "lara-dark-pink";
@@ -27,6 +30,7 @@ export default function Navbar() {
 			text
 			badge="2"
 			badgeClassName="p-badge-danger"
+			onClick={() => setVisible(true)}
 		/>
 	);
 	const end = (
@@ -43,7 +47,7 @@ export default function Navbar() {
 
 	return (
 		<div className="card">
-			<Menubar start={start} end={end} />
+			<Menubar model={[]} start={start} end={end} />
 		</div>
 	);
 }

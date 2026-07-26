@@ -4,28 +4,16 @@ import { Rating } from "primereact/rating";
 import { Tag } from "primereact/tag";
 import { useEffect, useState } from "react";
 import { ProductService } from "../services/ProductService";
-
-interface Product {
-	id: string;
-	code: string;
-	name: string;
-	description: string;
-	image: string;
-	price: number;
-	category: string;
-	quantity: number;
-	inventoryStatus: string;
-	rating: number;
-}
+import type { IProduct } from "../types/IProduct";
 
 export default function ShopList() {
-	const [products, setProducts] = useState<Product[]>([]);
+	const [products, setProducts] = useState<IProduct[]>([]);
 
 	useEffect(() => {
-		ProductService.getProducts().then((data: Product[]) => setProducts(data));
+		ProductService.getProducts().then((data: IProduct[]) => setProducts(data));
 	}, []);
 
-	const getSeverity = (product: Product) => {
+	const getSeverity = (product: IProduct) => {
 		switch (product.inventoryStatus) {
 			case "INSTOCK":
 				return "success";
@@ -41,7 +29,7 @@ export default function ShopList() {
 		}
 	};
 
-	const itemTemplate = (product: Product) => {
+	const itemTemplate = (product: IProduct) => {
 		return (
 			<div className="col-12">
 				<div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
