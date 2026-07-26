@@ -1,17 +1,24 @@
+import { useSetAtom } from "jotai";
 import { Button } from "primereact/button";
-import { DataView } from "primereact/dataview";
+import { DataView as PrimeDataView } from "primereact/dataview";
 import { Rating } from "primereact/rating";
 import { Tag } from "primereact/tag";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { cartItemCounterAtom } from "../atoms/cart";
+import { useCartList } from "../hooks/CartList";
 import { ProductService } from "../services/ProductService";
-import type { IProduct } from "../types/IProduct";
+import type { ICartItem, IProduct } from "../types";
 
 export default function ShopList() {
 	const [products, setProducts] = useState<IProduct[]>([]);
+	const { cartList, setCartList } = useCartList();
+	const setCartItemCounter = useSetAtom(cartItemCounterAtom);
 
 	useEffect(() => {
 		ProductService.getProducts().then((data: IProduct[]) => setProducts(data));
-	}, []);
+		setCartItemCounter(cartList?.length || 0);
+	}, [cartList, setCartItemCounter]);
 
 	const getSeverity = (product: IProduct) => {
 		switch (product.inventoryStatus) {
@@ -28,6 +35,13 @@ export default function ShopList() {
 				return null;
 		}
 	};
+
+	function addToCart(newCartItem: ICartItem) {
+		const newCartList = [...(cartList || []), newCartItem];
+		setCartList(newCartList);
+		setCartItemCounter(newCartList.length);
+		toast.success("new item added to cart");
+	}
 
 	const itemTemplate = (product: IProduct) => {
 		return (
@@ -59,6 +73,15 @@ export default function ShopList() {
 								icon="pi pi-shopping-cart"
 								className="p-button-rounded"
 								disabled={product.inventoryStatus === "OUTOFSTOCK"}
+								onClick={() =>
+									addToCart({
+										id: product.id,
+										name: product.name,
+										image: product.image,
+										price: product.price,
+										category: product.category,
+									})
+								}
 							></Button>
 						</div>
 					</div>
@@ -69,7 +92,7 @@ export default function ShopList() {
 
 	return (
 		<div className="card">
-			<DataView
+			<PrimeDataView
 				value={products}
 				itemTemplate={itemTemplate}
 				paginator

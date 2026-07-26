@@ -1,15 +1,18 @@
-import { useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { PrimeReactContext } from "primereact/api";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Menubar } from "primereact/menubar";
 import { useContext, useState } from "react";
+import { cartItemCounterAtom } from "../atoms/cart";
 import { visibleAtom } from "../atoms/visible";
 
 export default function Navbar() {
 	const [isDark, setIsDark] = useState(false);
 	const { changeTheme } = useContext(PrimeReactContext);
 	const setVisible = useSetAtom(visibleAtom);
+	const cartItemCounter = useAtomValue(cartItemCounterAtom);
+	const badgeValue = cartItemCounter ? String(cartItemCounter) : "";
 
 	const LIGHT_THEME = "lara-light-pink";
 	const DARK_THEME = "lara-dark-pink";
@@ -28,7 +31,7 @@ export default function Navbar() {
 			label="Cart"
 			icon="pi pi-shopping-cart"
 			text
-			badge="2"
+			badge={badgeValue}
 			badgeClassName="p-badge-danger"
 			onClick={() => setVisible(true)}
 		/>

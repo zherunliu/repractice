@@ -16,7 +16,9 @@
 		"primeicons": "^8.0.0",
 		"primereact": "^10.9.8",
 		"react": "^19.2.7",
-		"react-dom": "^19.2.7"
+		"react-dom": "^19.2.7",
+		"react-use": "^17.6.1",
+		"sonner": "^2.0.7"
 	},
 	"devDependencies": {
 		"@types/node": "^24.13.2",
