@@ -1,10 +1,11 @@
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { PrimeReactContext } from "primereact/api";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Menubar } from "primereact/menubar";
 import { useContext, useState } from "react";
 import { cartItemCounterAtom } from "../atoms/cart";
+import { searchTextAtom } from "../atoms/list";
 import { visibleAtom } from "../atoms/visible";
 
 export default function Navbar() {
@@ -13,6 +14,7 @@ export default function Navbar() {
 	const setVisible = useSetAtom(visibleAtom);
 	const cartItemCounter = useAtomValue(cartItemCounterAtom);
 	const badgeValue = cartItemCounter ? String(cartItemCounter) : "";
+	const [searchText, setSearchText] = useAtom(searchTextAtom);
 
 	const LIGHT_THEME = "lara-light-pink";
 	const DARK_THEME = "lara-dark-pink";
@@ -38,7 +40,13 @@ export default function Navbar() {
 	);
 	const end = (
 		<div className="flex justify-content-between">
-			<InputText placeholder="Search" type="text" className="w-full mr-2" />
+			<InputText
+				placeholder="Search"
+				type="text"
+				className="w-full mr-2"
+				value={searchText}
+				onChange={(e) => setSearchText(e.target.value)}
+			/>
 			<Button
 				icon={`pi pi-${isDark ? "sun" : "moon"}`}
 				text

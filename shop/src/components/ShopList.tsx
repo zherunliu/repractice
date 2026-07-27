@@ -1,22 +1,21 @@
-import { useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { Button } from "primereact/button";
 import { DataView as PrimeDataView } from "primereact/dataview";
 import { Rating } from "primereact/rating";
 import { Tag } from "primereact/tag";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { toast } from "sonner";
 import { cartItemCounterAtom } from "../atoms/cart";
+import { filteredProductsAtom } from "../atoms/list";
 import { useCartList } from "../hooks/CartList";
-import { ProductService } from "../services/ProductService";
 import type { ICartItem, IProduct } from "../types";
 
 export default function ShopList() {
-	const [products, setProducts] = useState<IProduct[]>([]);
 	const { cartList, setCartList } = useCartList();
 	const setCartItemCounter = useSetAtom(cartItemCounterAtom);
+	const products = useAtomValue(filteredProductsAtom);
 
 	useEffect(() => {
-		ProductService.getProducts().then((data: IProduct[]) => setProducts(data));
 		setCartItemCounter(cartList?.length || 0);
 	}, [cartList, setCartItemCounter]);
 
