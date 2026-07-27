@@ -1,17 +1,20 @@
+import { useAtomValue } from "jotai";
 import { OrderList } from "primereact/orderlist";
 import { useState } from "react";
+import { cartItemCounterAtom } from "../atoms/cart";
 import { useCartList } from "../hooks/CartList";
 import type { ICartItem, IProduct } from "../types";
 
 export default function CartList() {
 	const { cartList } = useCartList();
 	const [products, setProducts] = useState<ICartItem[]>(cartList || []);
+	const cartItemCounter = useAtomValue(cartItemCounterAtom);
 
 	const itemTemplate = (item: IProduct) => {
 		return (
 			<div className="flex flex-wrap p-2 align-items-center gap-3">
 				<img
-					className="w-4rem shadow-2 flex-shrink-0 border-round"
+					className="w-4rem shadow-2 shrink-0 border-round"
 					src={`https://primefaces.org/cdn/primereact/images/product/${item.image}`}
 					alt={item.name}
 				/>
@@ -28,14 +31,18 @@ export default function CartList() {
 	};
 
 	return (
-		<div className="card xl:flex xl:justify-content-center">
-			<OrderList
-				dataKey="id"
-				value={products}
-				onChange={(e) => setProducts(e.value)}
-				itemTemplate={itemTemplate}
-				header="Cart"
-			></OrderList>
+		<div className="card flex justify-content-center">
+			{cartItemCounter ? (
+				<OrderList
+					dataKey="id"
+					value={products}
+					onChange={(e) => setProducts(e.value)}
+					itemTemplate={itemTemplate}
+					header="Cart"
+				></OrderList>
+			) : (
+				<h2>No items in cart</h2>
+			)}
 		</div>
 	);
 }
